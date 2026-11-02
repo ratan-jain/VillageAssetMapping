@@ -18,3 +18,24 @@ venv/
 .coverage
 .pytest_cache/
 
+# Large geographical datasets
+*.osm.pbf
+BengaluruComponents.csv
+BengaluruUrbanComponents.csv
+
+# Local database and backups
+*.db
+*.db-shm
+*.db-wal
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Frontend dependencies and builds
+node_modules/
+dist/
+.env
+.env.local

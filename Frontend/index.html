@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Village Asset Mapping and Service Gap Analysis"
+    >
+
+    <title>Village Asset Mapping</title>
+
+    <!-- Application stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Leaflet stylesheet -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <!-- Marker clustering stylesheet -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"
+    >
+</head>
+
+<body>
+    <div class="app-container">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-icon">V</div>
+
+                <div>
+                    <h1>Village Mapping</h1>
+                    <p>Asset Intelligence System</p>
+                </div>
+            </div>
+
+            <!-- SEARCH -->
+            <div class="sidebar-section">
+                <label for="search-input">SEARCH ASSETS</label>
+
+                <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Search assets or villages..."
+                >
+            </div>
+
+            <!-- CATEGORY FILTER -->
+            <div class="sidebar-section">
+                <label for="category-filter">CATEGORY</label>
+
+                <select id="category-filter">
+                    <option value="all">All categories</option>
+                    <option value="school">Schools</option>
+                    <option value="college">Colleges</option>
+                    <option value="hospital">Hospitals</option>
+                    <option value="forest">Forests</option>
+                    <option value="river">Rivers</option>
+                    <option value="lake">Lakes</option>
+                    <option value="water_tank">Water tanks</option>
+                    <option value="road">Roads</option>
+                </select>
+            </div>
+
+            <!-- STATISTICS -->
+            <div class="statistics">
+
+                <div class="stat-card">
+                    <span>Total Assets</span>
+                    <strong id="total-assets">--</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>Visible Assets</span>
+                    <strong id="visible-assets">--</strong>
+                </div>
+
+            </div>
+
+            <!-- ASSET LIST -->
+            <div class="asset-heading">
+                <h2>Registered Assets</h2>
+                <span id="asset-count">0</span>
+            </div>
+
+            <div id="asset-list" class="asset-list">
+                <p class="loading-message">Loading assets...</p>
+            </div>
+
+            <!-- CONNECTION STATUS -->
+            <div class="sidebar-footer">
+                <span class="status-indicator"></span>
+                <span id="connection-status">
+                    Connecting to server...
+                </span>
+            </div>
+        <button id="add-asset-button" class="add-asset-button">
+    + Add New Asset
+</button>
+
+<!-- Add Asset Modal -->
+<div id="asset-modal" class="modal-overlay" hidden>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Add New Asset</h2>
+            <button type="button" id="close-modal">×</button>
+        </div>
+
+        <form id="asset-form">
+
+            <label for="asset-name">Asset Name</label>
+            <input type="text" id="asset-name" required>
+
+            <label for="asset-village">Village</label>
+            <input type="text" id="asset-village" required>
+
+            <label for="asset-category">Category</label>
+            <select id="asset-category" required>
+                <option value="">Select category</option>
+                <option value="school">School</option>
+                <option value="college">College</option>
+                <option value="hospital">Hospital</option>
+                <option value="forest">Forest</option>
+                <option value="river">River</option>
+                <option value="lake">Lake</option>
+                <option value="water_tank">Water Tank</option>
+                <option value="road">Road</option>
+            </select>
+
+            <label for="asset-latitude">Latitude</label>
+            <input type="number" id="asset-latitude"
+                   step="any" required>
+
+            <label for="asset-longitude">Longitude</label>
+            <input type="number" id="asset-longitude"
+                   step="any" required>
+
+            <label for="asset-owner-type">Owner Type</label>
+            <input type="text" id="asset-owner-type" required>
+
+            <label for="asset-owner-name">Owner Name</label>
+            <input type="text" id="asset-owner-name" required>
+
+            <label for="asset-authority">Managing Authority</label>
+            <input type="text" id="asset-authority">
+
+            <button type="submit" id="save-asset-button">
+                Save Asset
+            </button>
+
+        </form>
+    </div>
+</div>
+
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <header class="topbar">
+
+                <div>
+                    <h2>Village Asset Overview</h2>
+                    <p>
+                        Explore and manage mapped community resources.
+                    </p>
+                </div>
+
+                <div class="topbar-status">
+                    <span class="status-indicator"></span>
+                    <span>Live Map</span>
+                </div>
+
+            </header>
+
+            <!-- MAP -->
+            <section class="map-container">
+
+                <div id="map"></div>
+
+                <!-- MAP LEGEND -->
+                <div class="map-legend">
+
+                    <h3>Map Legend</h3>
+
+                    <p>
+                        <span class="legend-dot school"></span>
+                        Schools
+                    </p>
+
+                    <p>
+                        <span class="legend-dot hospital"></span>
+                        Hospitals
+                    </p>
+
+                    <p>
+                        <span class="legend-dot water_tank"></span>
+                        Water tanks
+                    </p>
+
+                    <p>
+                        <span class="legend-dot other"></span>
+                        Other assets
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- Leaflet library -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Marker clustering library -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
+    <!-- Application JavaScript -->
+    <script src="app.js"></script>
+
+</body>
+</html>
