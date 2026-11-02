@@ -1,0 +1,517 @@
+
+/* ==========================================
+   VILLAGE ASSET MAPPING
+   Natural Cartographic Design System
+========================================== */
+
+:root {
+    --forest: #263F3A;
+    --forest-light: #34564C;
+    --parchment: #F4F0E6;
+    --paper: #FFFCF5;
+    --ochre: #D6A85F;
+    --sage: #78958A;
+    --terracotta: #C97961;
+    --river: #6C91A0;
+    --ink: #293832;
+    --muted: #78837B;
+    --border: #E2DED2;
+    --white: #FFFFFF;
+
+    --shadow:
+        0 8px 25px rgba(38, 63, 58, 0.09);
+}
+
+/* GLOBAL RESET */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    min-height: 100vh;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* MAIN LAYOUT */
+
+.container,
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+aside,
+.sidebar {
+    width: 390px;
+    min-width: 320px;
+    background: var(--forest);
+    color: var(--paper);
+    padding: 28px 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.sidebar h1,
+aside h1 {
+    color: var(--paper);
+}
+
+.sidebar p,
+aside p {
+    color: #C2D0C7;
+}
+
+/* BRAND */
+
+.logo,
+.brand {
+    color: var(--ochre);
+    font-weight: 700;
+}
+
+.sidebar-header {
+    padding-bottom: 25px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    margin-bottom: 30px;
+}
+
+/* SEARCH AND FILTERS */
+
+.sidebar label,
+aside label {
+    display: block;
+    color: #C5D1C9;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+#search-input,
+#category-filter {
+    width: 100%;
+    padding: 13px 14px;
+    margin-bottom: 22px;
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 8px;
+    background: #304B43;
+    color: var(--paper);
+    outline: none;
+}
+
+#search-input::placeholder {
+    color: #B5C5BB;
+}
+
+#search-input:focus,
+#category-filter:focus {
+    border-color: var(--ochre);
+}
+
+#category-filter option {
+    background: var(--forest);
+    color: white;
+}
+
+/* STATISTICS */
+
+.stats-container,
+.stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 10px 0 28px;
+}
+
+.stat-card {
+    background: var(--forest-light);
+    padding: 18px 15px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+}
+
+.stat-card p {
+    font-size: 12px;
+    color: #C5D1C9;
+    margin-bottom: 12px;
+}
+
+.stat-card h2 {
+    font-size: 28px;
+    color: var(--paper);
+    font-weight: 600;
+}
+
+/* ASSET LIST */
+
+.asset-list,
+#asset-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.asset-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 8px;
+    padding: 14px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.asset-card:hover {
+    background: rgba(255,255,255,0.12);
+}
+
+.asset-card.active {
+    border-color: var(--ochre);
+    background: rgba(214,168,95,0.14);
+}
+
+.asset-card h3 {
+    color: var(--paper);
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.asset-card p {
+    font-size: 12px;
+    color: #C5D1C9;
+}
+
+.asset-category {
+    display: inline-block;
+    margin-top: 9px;
+    padding: 4px 9px;
+    border-radius: 20px;
+    background: rgba(214,168,95,0.17);
+    color: #F0D5A4;
+    font-size: 11px;
+}
+
+/* ADD ASSET BUTTON */
+
+.add-asset-button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    background: var(--ochre);
+    color: #293832;
+    font-weight: 700;
+    font-size: 14px;
+    transition: background 0.2s ease;
+}
+
+.add-asset-button:hover {
+    background: #E2BD7E;
+}
+
+/* CONNECTION STATUS */
+
+#connection-status {
+    margin-top: 20px;
+    padding: 12px 0;
+    color: #C5D1C9;
+    font-size: 12px;
+}
+
+/* MAIN CONTENT */
+
+main,
+.main-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* TOP HEADER */
+
+.topbar,
+header {
+    background: var(--paper);
+    padding: 22px 30px;
+    border-bottom: 1px solid var(--border);
+}
+
+.topbar h1,
+header h1 {
+    color: var(--forest);
+    font-size: 25px;
+}
+
+.topbar p,
+header p {
+    color: var(--muted);
+    margin-top: 6px;
+}
+
+/* MAP */
+
+#map {
+    flex: 1;
+    min-height: 550px;
+    margin: 22px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    z-index: 1;
+}
+
+/* MAP LEGEND */
+
+.map-legend,
+.legend {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: var(--shadow);
+}
+
+.map-legend h3,
+.legend h3 {
+    color: var(--forest);
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+/* MAP MARKER COLOURS */
+
+.marker-school {
+    background: var(--sage);
+}
+
+.marker-hospital {
+    background: var(--terracotta);
+}
+
+.marker-water {
+    background: var(--river);
+}
+
+.marker-other {
+    background: var(--ochre);
+}
+
+/* LEAFLET POPUPS */
+
+.leaflet-popup-content-wrapper {
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 9px;
+}
+
+.leaflet-popup-content {
+    line-height: 1.7;
+}
+
+.leaflet-popup-content strong {
+    color: var(--forest);
+    font-size: 15px;
+}
+
+.leaflet-popup-content p {
+    margin: 7px 0;
+}
+
+/* ADD ASSET MODAL */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(28, 43, 37, 0.68);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-overlay[hidden] {
+    display: none !important;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 520px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--paper);
+    color: var(--ink);
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.22);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.modal-header h2 {
+    color: var(--forest);
+    font-size: 22px;
+}
+
+#close-modal {
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-size: 28px;
+    cursor: pointer;
+}
+
+#close-modal:hover {
+    color: var(--terracotta);
+}
+
+/* FORM */
+
+#asset-form {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+#asset-form label {
+    color: var(--forest);
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 7px;
+}
+
+#asset-form input,
+#asset-form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background: #FFFFFF;
+    color: var(--ink);
+    font-size: 14px;
+    outline: none;
+}
+
+#asset-form input::placeholder {
+    color: #9A9F98;
+}
+
+#asset-form input:focus,
+#asset-form select:focus {
+    border-color: var(--sage);
+    box-shadow: 0 0 0 3px rgba(120,149,138,0.16);
+}
+
+#asset-form select option {
+    color: var(--ink);
+    background: white;
+}
+
+#save-asset-button {
+    margin-top: 18px;
+    padding: 13px;
+    border: none;
+    border-radius: 8px;
+    background: var(--forest);
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    transition: background 0.2s ease;
+}
+
+#save-asset-button:hover {
+    background: var(--forest-light);
+}
+
+/* SCROLLBAR */
+
+.modal-content::-webkit-scrollbar,
+aside::-webkit-scrollbar {
+    width: 7px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: #C7C2B5;
+    border-radius: 10px;
+}
+
+aside::-webkit-scrollbar-thumb {
+    background: #60776D;
+    border-radius: 10px;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 850px) {
+    .container,
+    .app-container {
+        flex-direction: column;
+    }
+
+    aside,
+    .sidebar {
+        width: 100%;
+        min-width: 0;
+    }
+
+    #map {
+        min-height: 500px;
+        margin: 12px;
+    }
+
+    .topbar,
+    header {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 500px) {
+    .modal-content {
+        padding: 19px;
+    }
+
+    .topbar h1,
+    header h1 {
+        font-size: 21px;
+    }
+}
